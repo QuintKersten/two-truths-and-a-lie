@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Two Truths & a Lie: World Edition</title>
+<meta name="description" content="Test your world knowledge! Two real facts and one lie from every country. Can you spot the fake?">
+<meta property="og:title" content="Two Truths & a Lie: World Edition">
+<meta property="og:description" content="Test your world knowledge! Two real facts and one lie from every country.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="stars-bg" id="stars"></div>
+<div class="wrap">
+  <nav class="nav">
+    <div class="nav-brand"><span>🌍</span> WorldEdition</div>
+    <div class="nav-links">
+      <div class="nav-link active" data-sec="home" onclick="showSection('home')">Play</div>
+      <div class="nav-link" data-sec="explore" onclick="showSection('explore')">Explore</div>
+      <div class="nav-link" data-sec="achieve" onclick="showSection('achieve')">Achievements</div>
+    </div>
+  </nav>
+
+  <!-- ========== HOME ========== -->
+  <div class="section active" id="sec-home">
+    <div class="hero" id="heroSection">
+      <span class="globe">🌍</span>
+      <h1>Two Truths & a Lie:<br>World Edition</h1>
+      <p>Two real facts about a country. One lie. Can you find it?</p>
+      <div class="stat-pill">
+        <span>🏳️ <b id="totalCountries">0</b> countries</span>
+        <span>📝 <b id="totalFacts">0</b> facts</span>
+        <span>🏆 <b id="bestScore">0</b> best score</span>
+      </div>
+      <div class="modes" id="modesGrid">
+        <div class="mode-card" onclick="startGame('classic')">
+          <div class="mode-icon">🎯</div>
+          <h3>Classic</h3>
+          <p>10 rounds. Pick the lie. Build a streak.</p>
+        </div>
+        <div class="mode-card" onclick="startGame('timed')">
+          <div class="mode-icon">⚡</div>
+          <h3>Speed Round</h3>
+          <p>30 seconds. Pick as many lies as you can.</p>
+          <div class="mode-badge">Fast</div>
+        </div>
+        <div class="mode-card" onclick="startGame('continent')">
+          <div class="mode-icon">🗺️</div>
+          <h3>Continent</h3>
+          <p>Pick a region. Master one part of the world.</p>
+        </div>
+        <div class="mode-card" onclick="startGame('daily')" id="dailyCard">
+          <div class="mode-icon">📅</div>
+          <h3>Daily Challenge</h3>
+          <p>Same questions for everyone. Compare scores.</p>
+          <div class="mode-badge new">Daily</div>
+        </div>
+      </div>
+      <div class="country-count">
+        🌐 Facts for <b id="cCountHero">0</b> countries across all continents. More added every week.
+      </div>
+    </div>
+
+    <!-- CONTINENT SELECTOR (for continent mode) -->
+    <div class="continents" id="contPicker" style="display:none">
+      <button class="cont-btn" data-c="Africa" onclick="pickContinent('Africa')">🌍 Africa</button>
+      <button class="cont-btn" data-c="Asia" onclick="pickContinent('Asia')">🌏 Asia</button>
+      <button class="cont-btn" data-c="Europe" onclick="pickContinent('Europe')">🌍 Europe</button>
+      <button class="cont-btn" data-c="Americas" onclick="pickContinent('Americas')">🌎 Americas</button>
+      <button class="cont-btn" data-c="Oceania" onclick="pickContinent('Oceania')">🌏 Oceania</button>
+    </div>
+
+    <!-- GAME AREA -->
+    <div id="gameArea" style="display:none">
+      <div class="score-bar">
+        <div class="sb-item"><div class="sb-label">Streak</div><div class="sb-val streak" id="sbStreak">0</div></div>
+        <div class="sb-item"><div class="sb-label">Score</div><div class="sb-val score" id="sbScore">0</div></div>
+        <div class="sb-item"><div class="sb-label">Round</div><div class="sb-val round" id="sbRound">1/10</div></div>
+        <div class="sb-item"><div class="sb-label">Accuracy</div><div class="sb-val acc" id="sbAcc">—</div></div>
+      </div>
+      <div class="dots" id="dots"></div>
+      <div class="timer-wrap" id="timerWrap"><div class="timer-bar" id="timerBar"></div></div>
+      <div id="cTag" class="c-tag"><span class="c-flag" id="cFlag"></span><span id="cName"></span><span class="c-diff" id="cDiff"></span></div>
+      <div class="facts" id="factsGrid"></div>
+      <div class="banner" id="banner"><span class="b-icon" id="bIcon"></span><div id="bText"></div><div class="b-sub" id="bSub"></div></div>
+      <button class="next-btn" id="nextBtn" onclick="nextRound()">Next Country →</button>
+    </div>
+
+    <!-- SHARE -->
+    <div class="share" id="shareSection" style="display:none">
+      <h3>Share Your Results</h3>
+      <div class="share-card">
+        <div class="sc-score" id="shareScore"></div>
+        <div class="sc-det" id="shareDetail"></div>
+      </div>
+      <div class="share-btns">
+        <button class="sh-btn" onclick="shareResults('copy')">📋 Copy</button>
+        <button class="sh-btn" onclick="shareResults('tweet')">🐦 Tweet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== EXPLORE ========== -->
+  <div class="section" id="sec-explore">
+    <div class="hero" style="padding-bottom:20px">
+      <h1 style="font-size:1.8rem">Explore Countries</h1>
+      <p>Click any country to learn three wild facts — and spot the lie.</p>
+    </div>
+    <div class="continents" id="contFilter"></div>
+    <div class="country-count" id="explorerCount"></div>
+    <input class="explorer-search" id="exSearch" placeholder="Search countries..." oninput="filterExplorer()">
+    <div class="explorer-grid" id="exGrid"></div>
+    <div class="ex-modal" id="exModal" onclick="if(event.target===this)closeModal()">
+      <div class="ex-modal-inner" id="exModalInner"></div>
+    </div>
+  </div>
+
+  <!-- ========== ACHIEVEMENTS ========== -->
+  <div class="section" id="sec-achieve">
+    <div class="hero" style="padding-bottom:10px">
+      <h1 style="font-size:1.8rem">Achievements</h1>
+      <p>Your badges of world knowledge.</p>
+    </div>
+    <div class="ach-grid" id="achGrid"></div>
+  </div>
+
+  <div class="footer"><p>Two Truths & a Lie: World Edition — facts sourced from public records, encyclopedias & news.</p></div>
+</div>
+<div class="toast" id="toast"></div>
+<div class="confetti-box" id="confetti"></div>
+
+<script src="facts.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
