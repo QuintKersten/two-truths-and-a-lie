@@ -52,6 +52,9 @@ a{color:var(--acc2);text-decoration:none}
 .cont-btn.active{box-shadow:0 0 12px var(--accg)}
 
 /* ===== SCORE BAR ===== */
+.game-topbar{display:flex;justify-content:flex-end;margin-bottom:12px}
+.quit-btn{padding:8px 16px;border-radius:10px;border:1px solid var(--brd);background:var(--s1);color:var(--dim);font-size:.8rem;font-weight:600;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:5px}
+.quit-btn:hover{background:var(--lie);color:#fff;border-color:var(--lie)}
 .score-bar{display:flex;justify-content:space-between;align-items:center;background:var(--s1);border:1px solid var(--brd);border-radius:14px;padding:14px 20px;margin-bottom:20px;flex-wrap:wrap;gap:8px}
 .sb-item{text-align:center;flex:1;min-width:60px}
 .sb-label{font-size:.65rem;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin-bottom:2px}

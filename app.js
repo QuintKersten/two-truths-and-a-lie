@@ -57,6 +57,30 @@ function showSection(sec) {
   if (sec === 'achieve') renderAchievements();
 }
 
+// Return to the homepage — reset any in-progress game and show the home screen
+function goHome() {
+  // Stop any running timed timer
+  if (timerInterval) clearInterval(timerInterval);
+  state.gameActive = false;
+  state.timedActive = false;
+  document.getElementById('timerWrap').classList.remove('on');
+
+  // Reset UI to home state
+  document.getElementById('heroSection').style.display = '';
+  document.getElementById('contPicker').style.display = 'none';
+  document.getElementById('gameArea').style.display = 'none';
+  document.getElementById('shareSection').style.display = 'none';
+
+  // Show the home section
+  showSection('home');
+}
+
+// Leave the current game and return to the homepage
+function quitGame() {
+  if (!confirm('Quit this game? Your current progress will be lost.')) return;
+  goHome();
+}
+
 // ============ GAME START ============
 function startGame(mode) {
   state = { score:0, streak:0, maxStreak:0, round:0, correct:0, total:10,

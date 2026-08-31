@@ -17,9 +17,9 @@
 <div class="stars-bg" id="stars"></div>
 <div class="wrap">
   <nav class="nav">
-    <div class="nav-brand"><span>🌍</span> WorldEdition</div>
+    <div class="nav-brand" onclick="goHome()" style="cursor:pointer" title="Back to home"><span>🌍</span> WorldEdition</div>
     <div class="nav-links">
-      <div class="nav-link active" data-sec="home" onclick="showSection('home')">Play</div>
+      <div class="nav-link active" data-sec="home" onclick="showSection('home')">🏠 Home</div>
       <div class="nav-link" data-sec="explore" onclick="showSection('explore')">Explore</div>
       <div class="nav-link" data-sec="achieve" onclick="showSection('achieve')">Achievements</div>
     </div>
@@ -76,6 +76,9 @@
 
     <!-- GAME AREA -->
     <div id="gameArea" style="display:none">
+      <div class="game-topbar">
+        <button class="quit-btn" onclick="quitGame()">✕ Quit Game</button>
+      </div>
       <div class="score-bar">
         <div class="sb-item"><div class="sb-label">Streak</div><div class="sb-val streak" id="sbStreak">0</div></div>
         <div class="sb-item"><div class="sb-label">Score</div><div class="sb-val score" id="sbScore">0</div></div>
