@@ -84,6 +84,8 @@ function startGame(mode) {
     const idx = day % db.length;
     state.usedCountries = [];
     state.dailyCountry = db[idx];
+    // Daily challenge is a single question — ask the daily country once
+    state.total = 1;
   }
 
   document.getElementById('heroSection').style.display = 'none';
